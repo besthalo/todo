@@ -42,17 +42,17 @@ app.get('/', async function (req, res) {
         }
     }
     try {
-        if(req.query.limit){
+        if (req.query.limit) {
             req.query.limit = parseInt(req.query.limit);
         }
         if (req.query.page) {
             req.query.page = parseInt(req.query.page);
         }
         let result = await TasksService.getTodoList(
-            req.query.order_by,
-            req.query.order_type,
-            req.query.limit,
-            (req.query.page ? req.query.limit * (req.query.page -1 ) : 0)
+            req.query.order_by ? req.query.order_by : 'id',
+            req.query.order_type ? req.query.order_type : 'ASC',
+            req.query.limit ? req.query.limit : 10,
+            (req.query.page ? req.query.limit * (req.query.page - 1) : 0)
         );
         if (result) {
             return res.status(200).send({ code: 200, message: 'success', data: result });
