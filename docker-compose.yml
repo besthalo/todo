@@ -1,0 +1,17 @@
+version: '3'
+services:
+  PHPMYADMIN:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - MYSQLDB:mysql
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOSTS: mysql
+      PMA_PORT: 3306
+  MYSQLDB:
+    image: mariadb:10.3
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - 3306:3306
