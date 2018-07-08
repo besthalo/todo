@@ -20,7 +20,7 @@ const connectConfig = {
     user: constants.MYSQL.USERNAME,
     password: constants.MYSQL.PASSWORD,
     port: constants.MYSQL.PORT,
-    database: constants.MYSQL.NAME,
+    database: constants.MYSQL.DB_NAME,
     stringifyObjects: false,
     supportBigNumbers: true
 }
@@ -30,7 +30,7 @@ const connectConfigPool = {
     user: constants.MYSQL.USERNAME,
     password: constants.MYSQL.PASSWORD,
     port: constants.MYSQL.PORT,
-    database: constants.MYSQL.NAME,
+    database: constants.MYSQL.DB_NAME,
     stringifyObjects: false,
     multipleStatements: true,
     charset: 'utf8mb4'
@@ -70,10 +70,8 @@ function query_pool(sql, params = {}, callback) {
         conn.query(sql, params, (err, result, fields) => {
             conn.release();
             return callback(err, result, fields);
-
         })
     })
-
 }
 
 async function connect(connection, callback) {
