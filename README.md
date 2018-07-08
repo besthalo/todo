@@ -56,3 +56,29 @@ docker-compose start
 ```curl
 docker-compose stop
 ```
+
+## Database
+### Database schema
+[SQL File](extra_file/work.sql)
+```sql
+CREATE DATABASE work CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+### Table Task
+[SQL File](extra_file/task_table.sql)
+```sql
+CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL,
+  `detail` text NOT NULL,
+  `status` enum('done','pending') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `status` (`status`);
+
+ALTER TABLE `tasks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+``` 
+
+[API Specification](extra_file/API_Document.pdf)
